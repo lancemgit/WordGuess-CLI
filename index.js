@@ -3,7 +3,7 @@ var inquirer = require("inquirer");
 var Word = require("./Word.js");
 
 // Global variables for list of words and the current word
-var wordList = ["cherry", "servant", "offer", "coordinated", "appreciate", "rock", "blind", "telephone", "sticks", "border", "sassy", "place", "sad", "burly", "launch", "fairies", "tap", "laugh", "fearless", "wide-eyed", "loud", "yoke", "desire", "grandfather"]
+var wordList = ["cherry", "servant", "offer", "coordinated", "appreciate", "rock", "blind", "telephone", "sticks", "border", "sassy", "place", "sad", "burly", "launch", "fairies", "tap", "laugh", "fearless", "wide-eyed", "loud", "yoke", "desire", "grandfather"];
 var currentWord = "";
 var guesses = 7;
 
@@ -26,12 +26,15 @@ function askChoice() {
                     + guesses +
                     "\nThe current visible word is...\n"
                     + currentWord.getWord() +
-                    "\nOnly the first letter of your response will count.\n"
+                    "\nOnly the first letter of your response will count." +
+                    "\nChoose wisely...  "
             }
         ])
         .then(answers => {
             // Incrementing guesses down
-            guesses--;
+            if (!currentWord.revealWord().includes(answers.userInput)) {
+                guesses--;
+            }
             // Running the guessLetter function on each letter in currentWord
             currentWord.guessEachLetter(answers.userInput[0].toLowerCase());
             // Checking if the user has won the game
@@ -68,9 +71,10 @@ function playAgain() {
 
 // Function to display to the user that they have loss
 function displayLoss() {
+
     console.log("\n\n*******************************" +
         "\nYou have lost the game.\n" +
-        "The word was  - " + currentWord.getWord());
+        "The word was  - " + currentWord.revealWord());
     playAgain();
 }
 
@@ -79,7 +83,7 @@ function displayLoss() {
 function displayWin() {
     console.log("\n\n*******************************" +
         "\nCONGRATULATIONS you won!\n" +
-        "The word was  - " + currentWord.getWord());
+        "The word was  - " + currentWord.revealWord());
     playAgain();
 }
 // Initially run the game

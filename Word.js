@@ -20,8 +20,16 @@ class Word {
         for (var i = 0; i < this.word.length; i++) {
             this.word[i].guessLetter(guess);
         }
-
     }
+    revealWord() {
+        var wordString = "";
+        for (var i = 0; i < this.word.length; i++) {
+            wordString += this.word[i].revealLetter();
+        }
+        return wordString;
+    }
+
+
 }
 
 module.exports = Word;

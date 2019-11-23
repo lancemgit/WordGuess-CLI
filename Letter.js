@@ -17,6 +17,10 @@ class Letter {
             this.isGuessed = true;
         }
     }
+
+    revealLetter() {
+        return this.character;
+    }
 }
 
 module.exports = Letter;
