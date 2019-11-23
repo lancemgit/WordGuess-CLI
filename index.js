@@ -32,7 +32,7 @@ function askChoice() {
         ])
         .then(answers => {
             // Incrementing guesses down
-            if (!currentWord.revealWord().includes(answers.userInput)) {
+            if (!currentWord.revealWord().includes(answers.userInput[0].toLowerCase())) {
                 guesses--;
             }
             // Running the guessLetter function on each letter in currentWord
